@@ -6,10 +6,10 @@ def genereateRules(minsupport, minconfidence):
     return ""
 
 def generateSubItemsets(minsupport, minconfidence, data, columns, data_list):
-    # count = 1;
-    # for i in range(len(data_list)):
-    #     for j in range(len(data)):
-    #         if data[j][data_list[i]]:
+    #data list [0] is position in columns data list [2] is the value of that it has
+    count = 1
+    
+
 
     return ""
 
@@ -44,13 +44,31 @@ def main():
             if tempCol.count(k)/len(data) > float(minsupport):
                 tempTup.append([i,columns[i],k,tempCol.count(k), tempCol.count(k)/len(data)])
         data_dict[columns[i]] = tempCol
-        data_list.append(tempTup)
-    #For data_list it is [name, value, number of times in elements in data, support]
+        data_list.extend(tempTup)
+    #For data_list it is [number,name, value, number of times in elements in data, support]
     # print(data_list)
     print("Minimum support: " + minsupport)
     print("Minimum confidence: " + minconfidence + "\n")
     print("Size of large itemset L(1): "+str(len(data_list)))
     print(data_list)
+    
+    
+    secondlist = []
+    for x in range(len(data_list)):
+        for y in range(x,len(data_list)):
+            supconcount = 0
+            if (x != y):
+                for i in range(len(data)):
+                    #The element that has to change is the data_list[x][0] and data_list[y][0]
+                    
+                    if ((data[i][data_list[x][0]] == data_list[x][2]) and (data[i][data_list[y][0]] == data_list[y][2])):
+                        supconcount += 1
+                support = supconcount/len(data)
+                if(support > float(minsupport)):
+                    secondlist.append([data_list[x],data_list[y],support])
+    print("Size of large itemset L(2):" +str(len(secondlist)))
+    print(secondlist)
+        
     
 
 if __name__ == "__main__":
