@@ -1,0 +1,15 @@
+@relation testcsvedited
+
+@attribute Bread {y,n}
+@attribute Milk {y,n}
+@attribute Diaper {n,y}
+@attribute Beer {n,y}
+@attribute Eggs {n,y}
+@attribute Coke {n,y}
+
+@data
+y,y,n,n,n,n
+y,n,y,y,y,n
+n,y,y,y,n,y
+y,y,y,y,n,n
+?,y,y,n,n,y
