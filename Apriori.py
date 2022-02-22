@@ -1,12 +1,16 @@
 from scipy.io import arff
 from array import *
-import collections
 #The Apriori Algorithm for a given file
 
 def genereateRules(minsupport, minconfidence):
     return ""
 
-def generateItemsets(minsupport, minconfidence):
+def generateSubItemsets(minsupport, minconfidence, data, columns, data_list):
+    # count = 1;
+    # for i in range(len(data_list)):
+    #     for j in range(len(data)):
+    #         if data[j][data_list[i]]:
+
     return ""
 
 # def dataRowsToColumns(data,meta):
@@ -38,11 +42,14 @@ def main():
         tempTup = []
         for k in tempSet:
             if tempCol.count(k)/len(data) > float(minsupport):
-                tempTup.append([columns[i],k,tempCol.count(k), tempCol.count(k)/len(data)])
+                tempTup.append([i,columns[i],k,tempCol.count(k), tempCol.count(k)/len(data)])
         data_dict[columns[i]] = tempCol
         data_list.append(tempTup)
     #For data_list it is [name, value, number of times in elements in data, support]
     # print(data_list)
+    print("Minimum support: " + minsupport)
+    print("Minimum confidence: " + minconfidence + "\n")
+    print("Size of large itemset L(1): "+str(len(data_list)))
     print(data_list)
     
 
