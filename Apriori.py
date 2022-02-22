@@ -46,28 +46,5 @@ def main():
     print(data_list)
     
 
-
-    
-
-
-    # for i in range(len(data)):s
-    #     for j in range(data[i]):
-        
-    # for i in range(len(meta)):
-    #     print(meta[i])
-
-    # for f in meta:
-    #     itemSet.insert(id, [f, 0])
-    #     id = id + 1
-
-    # for i in range(len(data)):
-    #     for j in range(len(data[i])):
-    #         if data[i][j] == 't':
-    #             count = itemSet[j][1]
-    #             itemSet[j][1] = count + 1
-
-    # for x in itemSet:
-    #     print(x)
-
 if __name__ == "__main__":
     main()
