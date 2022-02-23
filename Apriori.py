@@ -5,7 +5,7 @@ import timeit
 timer = timeit.default_timer()
 
 #Reads the .arff file
-file = input('Enter file name(include ' '): ')
+file = input('Enter file name(include quotes): ')
 data, meta = arff.loadarff(file)
 #Initializes the base itemSet and frequent item set
 columns = []
@@ -18,7 +18,7 @@ totalCount = 0
 #Creates the minimum support and confidence values
 minSup = input('Enter minimum support: ')
 minConf = input('Enter minimum confidence: ')
-dataTrue = input('Enter the value in the set when the data is true(include ' '): ')
+dataTrue = input('Enter the value in the set when the data is true(include quotes): ')
 #Inserts the base items to the itemsets at value 0
 for a in meta:
     itemSet.append([a, 0])
@@ -80,7 +80,7 @@ while boolean:
                 if float(newCount)/float(totalCount) >= float(minSup):
                     freqSet.append(newSet)
                     addedSet.append(newSet)
-                    
+
                     tempSet = list(newSet)
                     tempSet.append(newCount)
                     supportSet.append(tempSet)
