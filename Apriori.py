@@ -1,24 +1,24 @@
 from scipy.io import arff
 from array import *
 import timeit
-from itertools import chain, combinations
 
 timer = timeit.default_timer()
 
 #Reads the .arff file
-#fileName = input('Enter file name: ')
-data, meta = arff.loadarff('supermarket.arff')
+file = input('Enter file name(include ' '): ')
+data, meta = arff.loadarff(file)
 #Initializes the base itemSet and frequent item set
 columns = []
 itemSet = []
 firstSet = []
 freqSet = []
+supportSet = []
 previousfreqSet = []
 totalCount = 0
 #Creates the minimum support and confidence values
 minSup = input('Enter minimum support: ')
-minConf = 500
-dataTrue = 't'
+minConf = input('Enter minimum confidence: ')
+dataTrue = input('Enter the value in the set when the data is true(include ' '): ')
 #Inserts the base items to the itemsets at value 0
 for a in meta:
     itemSet.append([a, 0])
@@ -35,7 +35,7 @@ for b in range(len(data)):
 for d in itemSet:
     if float(d[1])/float(totalCount)>= float(minSup):
         firstSet.append(d[0])
-        #previousfreqSet.append(d[0])
+        supportSet.append([d[0],d[1]])
 
 #Adds The first set into the freqSet as pairs
 for e in firstSet:
@@ -50,6 +50,9 @@ for e in firstSet:
                 if float(occurence)/float(totalCount) >= float(minSup) and pairSet not in freqSet:
                     freqSet.append(pairSet)
                     previousfreqSet.append(pairSet)
+                    tempSet = list(pairSet)
+                    tempSet.append(occurence)
+                    supportSet.append(tempSet)
                     break
 #Loops through the frequency list to find L3, L4...
 boolean = True
@@ -77,6 +80,10 @@ while boolean:
                 if float(newCount)/float(totalCount) >= float(minSup):
                     freqSet.append(newSet)
                     addedSet.append(newSet)
+                    
+                    tempSet = list(newSet)
+                    tempSet.append(newCount)
+                    supportSet.append(tempSet)
                     boolean = True
     #Clears out the level before and adjusts the level
     previousfreqSet = []
@@ -85,9 +92,6 @@ while boolean:
 sortedFreq = [frozenset(o) for o in freqSet]
 cleanFreq = set(sortedFreq)
 
-def findSubsets(superSet):
-    subsets =list(superSet)
-    return chain.from_iterable(combinations(subsets, p) for p in range(len(subsets)+1))
 
 testCount = 0
 for j in cleanFreq:
