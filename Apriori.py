@@ -38,11 +38,9 @@ for e in firstSet:
         #Checks if the pair being looked to add already exists or is non entry ie x,x or y,y
         if [f,e] not in freqSet and e != f:
             pairSet = [e,f]
-            h = columns.index(e)
-            i = columns.index(f)
             occurence = 0
             for g in data:
-                if g[h] == dataTrue and g[i] == dataTrue:
+                if g[columns.index(e)] == dataTrue and g[columns.index(f)] == dataTrue:
                     occurence = occurence + 1
                 if occurence > minSup and pairSet not in freqSet:
                     freqSet.append(pairSet)
@@ -76,10 +74,10 @@ while boolean:
     previousfreqSet = addedSet
 
 sortedFreq = [frozenset(o) for o in freqSet]
-cleaned_set = set(sortedFreq)
+cleanFreq = set(sortedFreq)
 
 testCount = 0
-for j in cleaned_set:
+for j in cleanFreq:
     print list(j)
     testCount =  testCount + 1
 print testCount
